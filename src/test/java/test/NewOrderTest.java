@@ -1,11 +1,16 @@
 package test;
 
 import base.BaseTest;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import pageObject.YandexScooterMainPage;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 public class NewOrderTest extends BaseTest {
+
+    private static final String EXPECT_RESULT = "Заказ оформлен";
 
     @Test
     @DisplayName("Проверка возможности создания заказа кнопкой в хедере")
@@ -17,8 +22,7 @@ public class NewOrderTest extends BaseTest {
                 .enterRandomDataIntoTheForm()
                 .clickCreateOrder()
                 .clickConfirmOrder();
-
-        System.out.println(actualResult);
+        assertEquals(EXPECT_RESULT, actualResult);
     }
 
     @Test
@@ -31,7 +35,6 @@ public class NewOrderTest extends BaseTest {
                 .enterRandomDataIntoTheForm()
                 .clickCreateOrder()
                 .clickConfirmOrder();
-
-        System.out.println(actualResult);
+        assertEquals(EXPECT_RESULT, actualResult);
     }
 }
