@@ -13,6 +13,8 @@ public class PopUpOrderConfirmation extends BasePage {
     // Текст подтверждения заказа
     private By orderCreateText = By.xpath(".//div[@class='Order_ModalHeader__3FDaJ'and text()='Заказ оформлен']");
 
+    private static final String TEXT_FOR_REGULAR = "\\s*Номер[\\s\\S]*";
+
     public PopUpOrderConfirmation(WebDriver driver) {
         super(driver);
     }
@@ -21,9 +23,11 @@ public class PopUpOrderConfirmation extends BasePage {
         return title;
     }
 
-    public String clickConfirmOrder(){
+    public String clickConfirmOrder() {
         driver.findElement(buttonYes).click();
         waitVisibilityElement(orderCreateText);
-       return driver.findElement(orderCreateText).getText();
+        return driver.findElement(orderCreateText).getText()
+                .replaceFirst(TEXT_FOR_REGULAR, "")
+                .trim();
     }
 }
